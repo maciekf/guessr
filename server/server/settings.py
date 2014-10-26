@@ -81,4 +81,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = '/home/szpaq/hackathon/guessr/server/media'
 STATIC_URL = '/static/'

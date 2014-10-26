@@ -55,7 +55,7 @@ def get_video(request, video_id=None):
         'video' : video.movie.url,
         'question': video.question,
         'goodAnswer': video.goodAnswer,
-        'wrongAnswer': video.badAnswer,
+        'wrongAnswer': video.wrongAnswer,
         'stopTime': video.stopTime
     }
     return HttpResponse(
