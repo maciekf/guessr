@@ -9,7 +9,6 @@ class UploadView(View):
     def post(self, request, *args, **kwargs):
         print ('post')
         print (request.FILES)
-        print (request.POST)
         
         movie = MovieToGuess()
         movie.movie = request.FILES['movie']
@@ -29,7 +28,15 @@ class UploadView(View):
                 hashtagObject.save()
             movie.hashtags.add(hashtagObject)
         
+        print (request.POST['userid'])
+        
         movie.save()
+
+        return HttpResponse(
+            json.dumps({'status' : 1}),
+            content_type="application/json"
+        )        
+        
 
 def tagged_videos(request, tag=None):
     tagged_vids = MovieToGuess.objects.filter(hashtags__tag=tag)
