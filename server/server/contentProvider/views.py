@@ -15,9 +15,9 @@ class UploadView(View):
         movie.userId = request.POST['userid']
         movie.name = request.POST['name']
         movie.question = request.POST['question']
-        movie.stopTime = request.POST['second']
-        movie.goodAnswer = request.POST['guessA']
-        movie.wrongAnswer = request.POST['guessB']
+        movie.stopTime = request.POST['stopTime']
+        movie.goodAnswer = request.POST['goodAnswer']
+        movie.wrongAnswer = request.POST['badAnswer']
         for hashtag in json.loads(request.POST['hashtags']):
             hashtagObject = None
             try:
