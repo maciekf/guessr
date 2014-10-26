@@ -8,5 +8,6 @@ urlpatterns = patterns('',
     # url(r'^blog/', include('blog.urls')),
 
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^videos/(?P<tag>[a-zA-Z0-9]+)/$', views.tagged_videos)
+    url(r'^videos/(?P<tag>[a-zA-Z0-9]+)/$', views.tagged_videos),
+    url(r'videos/?P<video_id>[0-9]+/$', views.get_video)
 )
