@@ -12,10 +12,12 @@ class MovieToGuess(models.Model):
     userId = models.IntegerField()
     
     name = models.CharField(max_length=100)
-    minature = models.FileField(upload_to = 'minatures')
+    minature = models.FileField(upload_to = 'minatures', null = True)
     
-    movie = models.FileField(upload_to = 'movies')
-    ending = models.FileField(upload_to = 'movies')
+    movie = models.FileField(upload_to = 'movies', null = True)
+    guessSecond = models.CharField(max_length=20)
+
+    question = models.CharField(max_length=300)
 
     guessA = models.CharField(max_length=300)
     guessB = models.CharField(max_length=300)
