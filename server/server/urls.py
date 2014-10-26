@@ -7,5 +7,6 @@ urlpatterns = patterns('',
     url(r'^upload/', csrf_exempt(UploadView.as_view())),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^videos/(?P<tag>[a-zA-Z0-9]+)/$', tagged_videos),
-    url(r'videos/?P<video_id>[0-9]+/$', get_video),
+    url(r'^videos/(?P<video_id>[0-9]+)/$', get_video),
+    url(r'^movies/(?P<video_id>[0-9]+)/$', get_movie),
 )

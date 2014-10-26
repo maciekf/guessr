@@ -3,7 +3,9 @@ from django.core.files import File
 from django.views.generic.base import View
 from django.http import HttpResponse
 from .models import *
+
 import json
+import os
 
 class UploadView(View):
     def post(self, request, *args, **kwargs):
@@ -30,6 +32,9 @@ class UploadView(View):
         print (request.POST['userid'])
 
         movie.save()
+        
+        path = movie.movie.path
+        os.system('ffmpeg -i ' + path + ' -r 1 -f image2 -vframes 1 '+ os.path.basename(path) +'.jpeg')
 
         return HttpResponse(
             json.dumps({'status' : 1}),
@@ -62,3 +67,11 @@ def get_video(request, video_id=None):
         json.dumps(result),
         content_type="application/json"
     )
+
+def get_movie(request, video_id=None):
+    video = MovieToGuess.objects.get(id=video_id)
+    filename = video.movie.url
+    response = HttpResponse(content_type='application')
+    response['Content-Disposition'] = 'attachment; filename=%s' % os.path.basename(filename)
+    response['Content-Length'] = os.path.getsize(filename)
+    return response
