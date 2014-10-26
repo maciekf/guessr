@@ -23,7 +23,8 @@ def get_video(request, video_id=None):
         'video' : video.movie,
         'question': video.question,
         'goodAnswer': video.goodAnswer,
-        'badAnswer': video.badAnswer,
+        'wrongAnswer': video.badAnswer,
+        'stopTime': video.stopTime
     }
     return HttpResponse(
         json.dumps(result),
