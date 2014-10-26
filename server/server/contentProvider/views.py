@@ -31,10 +31,11 @@ class UploadView(View):
 
         movie.save()
 
+
 def tagged_videos(request, tag=None):
     tagged_vids = MovieToGuess.objects.filter(hashtags__tag=tag)
     urls = [
-        {'id': tagged.id, 'miniature': tagged.miniature, 'name': tagged.name}
+        {'id': tagged.id, 'miniature': tagged.minature.url, 'name': tagged.name}
         for tagged in tagged_vids
     ]
     return HttpResponse(
@@ -46,7 +47,7 @@ def tagged_videos(request, tag=None):
 def get_video(request, video_id=None):
     video = MovieToGuess.objects.get(id=video_id)
     result = {
-        'video' : video.movie,
+        'video' : video.movie.url,
         'question': video.question,
         'goodAnswer': video.goodAnswer,
         'wrongAnswer': video.badAnswer,

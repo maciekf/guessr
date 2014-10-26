@@ -1,3 +1,7 @@
 .pydev
 .pydevproject
 .project
+server/minatures/
+server/movies/
+server/db.sqlite3
+*.pyc
