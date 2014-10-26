@@ -1,10 +1,11 @@
 from django.shortcuts import render, get_object_or_404
 from django.core.files import File
 from django.views.generic.base import View
+from django.http import HttpResponse
+from models import MovieToGuess
 import json
 
 class UploadView(View):
-
     def post(self, request, *args, **kwargs):
         print ('post')
         print (request.FILES)
@@ -29,3 +30,29 @@ class UploadView(View):
             movie.hashtags.add(hashtagObject)
         
         movie.save()
+
+def tagged_videos(request, tag=None):
+    tagged_vids = MovieToGuess.objects.filter(hashtags__tag=tag)
+    urls = [
+        {'id': tagged.id, 'miniature': tagged.miniature, 'name': tagged.name}
+        for tagged in tagged_vids
+    ]
+    return HttpResponse(
+        json.dumps({'videos' : urls}),
+        content_type="application/json"
+    )
+
+
+def get_video(request, video_id=None):
+    video = MovieToGuess.objects.get(id=video_id)
+    result = {
+        'video' : video.movie,
+        'question': video.question,
+        'goodAnswer': video.goodAnswer,
+        'wrongAnswer': video.badAnswer,
+        'stopTime': video.stopTime
+    }
+    return HttpResponse(
+        json.dumps(result),
+        content_type="application/json"
+    )

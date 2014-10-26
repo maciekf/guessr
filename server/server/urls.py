@@ -6,4 +6,6 @@ from .contentProvider.views import *
 urlpatterns = patterns('',
     url(r'^$', csrf_exempt(UploadView.as_view())),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^videos/(?P<tag>[a-zA-Z0-9]+)/$', tagged_videos),
+    url(r'videos/?P<video_id>[0-9]+/$', get_video),
 )
