@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.files import File
+import cv2
 
 # Create your models here.
 
@@ -12,8 +13,8 @@ class HashTag(models.Model):
 class MovieToGuess(models.Model):
     userId = models.IntegerField()
     name = models.CharField(max_length=100)
-    minature = models.FileField(upload_to = 'minatures', null = True)
-    movie = models.FileField(upload_to = 'movies', null = True)
+    minature = models.FileField(upload_to='minatures', null = True)
+    movie = models.FileField(upload_to='movies', null = True)
     stopTime = models.CharField(max_length=20)
     question = models.CharField(max_length=300)
     goodAnswer = models.CharField(max_length=300)
