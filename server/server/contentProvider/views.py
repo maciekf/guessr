@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.core.files import File
 from django.views.generic.base import View
 from django.http import HttpResponse
-from models import MovieToGuess
+from .models import *
 import json
 
 class UploadView(View):
@@ -20,7 +20,7 @@ class UploadView(View):
         movie.guessA = request.POST['guessA']
         movie.guessB = request.POST['guessB']
         
-        for hashtag in json.loads(reqest.POST['hashtags']):
+        for hashtag in json.loads(request.POST['hashtags']):
             hashtagObject = None
             try:
                 Hashtag.objects.get(tag=hashtag)
