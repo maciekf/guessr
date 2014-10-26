@@ -10,7 +10,9 @@ class HashTag(models.Model):
 
 class MovieToGuess(models.Model):
     userId = models.IntegerField()
+    
     name = models.CharField(max_length=100)
+    minature = models.FileField(upload_to = 'minatures')
     
     movie = models.FileField(upload_to = 'movies')
     ending = models.FileField(upload_to = 'movies')
@@ -18,7 +20,7 @@ class MovieToGuess(models.Model):
     guessA = models.CharField(max_length=300)
     guessB = models.CharField(max_length=300)
 
-    hashtags = models.ManyToMany(Hashtag)
+    hashtags = models.ManyToManyField(HashTag)
     
     def __str__(self):
         return self.name
